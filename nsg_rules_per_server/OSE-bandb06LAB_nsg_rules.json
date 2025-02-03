@@ -1,0 +1,48 @@
+[
+  {
+    "name": "Allow-ASG-Outbound-1521",
+    "priority": 205,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+      "*"
+    ],
+    "destinationPortRanges": [
+      "1521"
+    ],
+    "sourceApplicationSecurityGroups": [
+      {
+        "id": "bannjob-asg"
+      }
+    ],
+    "destinationApplicationSecurityGroups": [
+      {
+        "id": "bandb-asg"
+      }
+    ]
+  },
+  {
+    "name": "Allow-ASG-Inbound-1521",
+    "priority": 205,
+    "direction": "Inbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+      "*"
+    ],
+    "destinationPortRanges": [
+      "1521"
+    ],
+    "sourceApplicationSecurityGroups": [
+      {
+        "id": "bannjob-asg"
+      }
+    ],
+    "destinationApplicationSecurityGroups": [
+      {
+        "id": "bandb-asg"
+      }
+    ]
+  }
+]

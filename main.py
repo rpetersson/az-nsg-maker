@@ -1,5 +1,6 @@
 from python_excel2json import parse_excel_to_json
 import json
+import os
 
 class NetworkSecurityGroupRule:
     """
@@ -74,27 +75,38 @@ class NSGJsonGenerator:
             destination_port=item.get('Destination port')
         )
 
-    def generate_nsg_rules(self) -> list:
+    def generate_nsg_rules(self) -> dict:
         """
-        Generates a list of NSG rules in JSON format.
+        Generates a dictionary of NSG rules grouped by server.
 
-        :return: A list of dictionaries representing NSG rules.
+        :return: A dictionary where keys are server names and values are lists of NSG rules.
         """
+        server_rules = {}
         for sheet in self.data:
             results = sheet.get('results', [])
-            self.nsg_rules.extend(
-                [self.create_nsg_rule(item, direction, count).to_dict() for count, item in enumerate(results, start=1) for direction in ['Outbound', 'Inbound']]
-            )
-        return self.nsg_rules
+            for count, item in enumerate(results, start=1):
+                server_name = item.get('Destination server name')
+                if server_name not in server_rules:
+                    server_rules[server_name] = []
+                for direction in ['Outbound', 'Inbound']:
+                    rule = self.create_nsg_rule(item, direction, count)
+                    server_rules[server_name].append(rule.to_dict())
+        return server_rules
 
-    def save_to_file(self, filename: str) -> None:
+    def save_to_files(self, output_dir: str) -> None:
         """
-        Saves the generated NSG rules to a file.
+        Saves the generated NSG rules to separate files, one per server.
 
-        :param filename: The name of the file to save the NSG rules.
+        :param output_dir: The directory where the JSON files will be saved.
         """
-        with open(filename, 'w') as f:
-            json.dump(self.nsg_rules, f, indent=2)
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)
+
+        server_rules = self.generate_nsg_rules()
+        for server_name, rules in server_rules.items():
+            filename = os.path.join(output_dir, f"{server_name}_nsg_rules.json")
+            with open(filename, 'w') as f:
+                json.dump(rules, f, indent=2)
 
 class ExcelDataLoader:
     """
@@ -148,9 +160,7 @@ print(json.dumps(data, indent=3))
 
 # Create an instance of NSGJsonGenerator
 nsg_generator = NSGJsonGenerator(data)
-nsg_rules = nsg_generator.generate_nsg_rules()
 
-print(json.dumps(nsg_rules, indent=2))
-
-# Save the NSG rules to a file
-nsg_generator.save_to_file('nsg_rules.json')
+# Save the NSG rules to separate files, one per server
+output_directory = 'nsg_rules_per_server'
+nsg_generator.save_to_files(output_directory)

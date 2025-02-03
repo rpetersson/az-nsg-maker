@@ -1,0 +1,48 @@
+[
+  {
+    "name": "Allow-ASG-Outbound-8081",
+    "priority": 188,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+      "*"
+    ],
+    "destinationPortRanges": [
+      "8081"
+    ],
+    "sourceApplicationSecurityGroups": [
+      {
+        "id": "bannjob-asg"
+      }
+    ],
+    "destinationApplicationSecurityGroups": [
+      {
+        "id": "bannesm-asg"
+      }
+    ]
+  },
+  {
+    "name": "Allow-ASG-Inbound-8081",
+    "priority": 188,
+    "direction": "Inbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+      "*"
+    ],
+    "destinationPortRanges": [
+      "8081"
+    ],
+    "sourceApplicationSecurityGroups": [
+      {
+        "id": "bannjob-asg"
+      }
+    ],
+    "destinationApplicationSecurityGroups": [
+      {
+        "id": "bannesm-asg"
+      }
+    ]
+  }
+]

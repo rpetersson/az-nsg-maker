@@ -1,0 +1,94 @@
+[
+  {
+    "name": "Allow-ASG-Outbound-1521",
+    "priority": 170,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+      "*"
+    ],
+    "destinationPortRanges": [
+      "1521"
+    ],
+    "sourceApplicationSecurityGroups": [
+      {
+        "id": "bandb-asg"
+      }
+    ],
+    "destinationApplicationSecurityGroups": [
+      {
+        "id": "bandb-asg"
+      }
+    ]
+  },
+  {
+    "name": "Allow-ASG-Inbound-1521",
+    "priority": 170,
+    "direction": "Inbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+      "*"
+    ],
+    "destinationPortRanges": [
+      "1521"
+    ],
+    "sourceApplicationSecurityGroups": [
+      {
+        "id": "bandb-asg"
+      }
+    ],
+    "destinationApplicationSecurityGroups": [
+      {
+        "id": "bandb-asg"
+      }
+    ]
+  },
+  {
+    "name": "Allow-ASG-Outbound-1521",
+    "priority": 176,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+      "*"
+    ],
+    "destinationPortRanges": [
+      "1521"
+    ],
+    "sourceApplicationSecurityGroups": [
+      {
+        "id": "bandb-asg"
+      }
+    ],
+    "destinationApplicationSecurityGroups": [
+      {
+        "id": "bandb-asg"
+      }
+    ]
+  },
+  {
+    "name": "Allow-ASG-Inbound-1521",
+    "priority": 176,
+    "direction": "Inbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+      "*"
+    ],
+    "destinationPortRanges": [
+      "1521"
+    ],
+    "sourceApplicationSecurityGroups": [
+      {
+        "id": "bandb-asg"
+      }
+    ],
+    "destinationApplicationSecurityGroups": [
+      {
+        "id": "bandb-asg"
+      }
+    ]
+  }
+]

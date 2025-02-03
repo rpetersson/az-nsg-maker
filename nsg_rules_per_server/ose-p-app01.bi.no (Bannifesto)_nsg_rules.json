@@ -1,0 +1,48 @@
+[
+  {
+    "name": "Allow-ASG-Outbound-8084",
+    "priority": 134,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+      "*"
+    ],
+    "destinationPortRanges": [
+      "8084"
+    ],
+    "sourceApplicationSecurityGroups": [
+      {
+        "id": "banapp-asg"
+      }
+    ],
+    "destinationApplicationSecurityGroups": [
+      {
+        "id": "0"
+      }
+    ]
+  },
+  {
+    "name": "Allow-ASG-Inbound-8084",
+    "priority": 134,
+    "direction": "Inbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+      "*"
+    ],
+    "destinationPortRanges": [
+      "8084"
+    ],
+    "sourceApplicationSecurityGroups": [
+      {
+        "id": "banapp-asg"
+      }
+    ],
+    "destinationApplicationSecurityGroups": [
+      {
+        "id": "0"
+      }
+    ]
+  }
+]

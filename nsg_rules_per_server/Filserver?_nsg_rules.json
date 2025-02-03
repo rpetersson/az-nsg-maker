@@ -1,0 +1,140 @@
+[
+  {
+    "name": "Allow-ASG-Outbound-445",
+    "priority": 135,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+      "*"
+    ],
+    "destinationPortRanges": [
+      "445"
+    ],
+    "sourceApplicationSecurityGroups": [
+      {
+        "id": "banapp-asg"
+      }
+    ],
+    "destinationApplicationSecurityGroups": [
+      {
+        "id": "42"
+      }
+    ]
+  },
+  {
+    "name": "Allow-ASG-Inbound-445",
+    "priority": 135,
+    "direction": "Inbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+      "*"
+    ],
+    "destinationPortRanges": [
+      "445"
+    ],
+    "sourceApplicationSecurityGroups": [
+      {
+        "id": "banapp-asg"
+      }
+    ],
+    "destinationApplicationSecurityGroups": [
+      {
+        "id": "42"
+      }
+    ]
+  },
+  {
+    "name": "Allow-ASG-Outbound-2049",
+    "priority": 136,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+      "*"
+    ],
+    "destinationPortRanges": [
+      "2049"
+    ],
+    "sourceApplicationSecurityGroups": [
+      {
+        "id": "banapp-asg"
+      }
+    ],
+    "destinationApplicationSecurityGroups": [
+      {
+        "id": "42"
+      }
+    ]
+  },
+  {
+    "name": "Allow-ASG-Inbound-2049",
+    "priority": 136,
+    "direction": "Inbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+      "*"
+    ],
+    "destinationPortRanges": [
+      "2049"
+    ],
+    "sourceApplicationSecurityGroups": [
+      {
+        "id": "banapp-asg"
+      }
+    ],
+    "destinationApplicationSecurityGroups": [
+      {
+        "id": "42"
+      }
+    ]
+  },
+  {
+    "name": "Allow-ASG-Outbound-2049",
+    "priority": 174,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+      "*"
+    ],
+    "destinationPortRanges": [
+      "2049"
+    ],
+    "sourceApplicationSecurityGroups": [
+      {
+        "id": "bandb-asg"
+      }
+    ],
+    "destinationApplicationSecurityGroups": [
+      {
+        "id": "42"
+      }
+    ]
+  },
+  {
+    "name": "Allow-ASG-Inbound-2049",
+    "priority": 174,
+    "direction": "Inbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+      "*"
+    ],
+    "destinationPortRanges": [
+      "2049"
+    ],
+    "sourceApplicationSecurityGroups": [
+      {
+        "id": "bandb-asg"
+      }
+    ],
+    "destinationApplicationSecurityGroups": [
+      {
+        "id": "42"
+      }
+    ]
+  }
+]
