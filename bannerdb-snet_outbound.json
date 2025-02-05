@@ -1194,3 +1194,601 @@
         }
     ]
 }
+{
+    "name": "Allow-Outbound-42-to-bandb-asg-443",
+    "priority": 1001,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "443"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "42"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bandb-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-Outbound-42-to-bandb-asg-443",
+    "priority": 1002,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "443"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "42"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bandb-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-Outbound-42-to-bandb-asg-1521",
+    "priority": 1003,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "1521"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "42"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bandb-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-Outbound-banoraem-asg-to-bandb-asg-4903",
+    "priority": 1004,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "4903"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "banoraem-asg"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bandb-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-Outbound-42-to-bandb-asg-1521",
+    "priority": 1005,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "1521"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "42"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bandb-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-Outbound-42-to-bandb-asg-1521",
+    "priority": 1006,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "1521"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "42"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bandb-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-Outbound-42-to-bandb-asg-1521",
+    "priority": 1007,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "1521"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "42"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bandb-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-Outbound-bandb-asg-to-bandb-asg-1521",
+    "priority": 1008,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "1521"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "bandb-asg"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bandb-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-Outbound-bandb-asg-to-bandb-asg-22",
+    "priority": 1009,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "22"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "bandb-asg"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bandb-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-Outbound-bandb-asg-to-bandb-asg-1521",
+    "priority": 1010,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "1521"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "bandb-asg"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bandb-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-Outbound-42-to-bandb-asg-80",
+    "priority": 1011,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "80"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "42"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bandb-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-Outbound-42-to-bandb-asg-80",
+    "priority": 1012,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "80"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "42"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bandb-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-Outbound-42-to-bandb-asg-443",
+    "priority": 1013,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "443"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "42"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bandb-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-Outbound-bandb-asg-to-bandb-asg-1521",
+    "priority": 1014,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "1521"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "bandb-asg"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bandb-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-Outbound-42-to-bandb-asg-80",
+    "priority": 1015,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "80"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "42"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bandb-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-Outbound-42-to-bandb-asg-22",
+    "priority": 1016,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "22"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "42"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bandb-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-Outbound-banoraem-asg-to-bandb-asg-1521",
+    "priority": 1017,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "1521"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "banoraem-asg"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bandb-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-Outbound-banoraem-asg-to-bandb-asg-4903",
+    "priority": 1018,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "4903"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "banoraem-asg"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bandb-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-Outbound-42-to-bandb-asg-1521",
+    "priority": 1019,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "1521"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "42"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bandb-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-Outbound-0-to-bandb-asg-1521",
+    "priority": 1020,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "1521"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "0"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bandb-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-Outbound-bandb-asg-to-bandb-asg-1521",
+    "priority": 1021,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "1521"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "bandb-asg"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bandb-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-Outbound-banoraem-asg-to-bandb-asg-4903",
+    "priority": 1022,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "4903"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "banoraem-asg"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bandb-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-Outbound-42-to-bandb-asg-25",
+    "priority": 1023,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "25"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "42"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bandb-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-Outbound-42-to-bandb-asg-2049",
+    "priority": 1024,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "2049"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "42"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bandb-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-Outbound-bandb-asg-to-bandb-asg-1521",
+    "priority": 1025,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "1521"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "bandb-asg"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bandb-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-Outbound-bandb-asg-to-bandb-asg-1521",
+    "priority": 1026,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "1521"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "bandb-asg"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bandb-asg"
+        }
+    ]
+}
