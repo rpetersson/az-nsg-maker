@@ -1,0 +1,299 @@
+{
+    "name": "Allow-bannjob-asg-to-bandb-asg-1521",
+    "priority": 1001,
+    "direction": "Inbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "1521"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "bannjob-asg"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bandb-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-bannjob-asg-to-bandb-asg-1521",
+    "priority": 1002,
+    "direction": "Inbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "1521"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "bannjob-asg"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bandb-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-bannjob-asg-to-bannesm-asg-8082",
+    "priority": 1003,
+    "direction": "Inbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "8082"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "bannjob-asg"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bannesm-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-bannjob-asg-to-bannesm-asg-8081",
+    "priority": 1004,
+    "direction": "Inbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "8081"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "bannjob-asg"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bannesm-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-bannjob-asg-to-bannesm-asg-8082",
+    "priority": 1005,
+    "direction": "Inbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "8082"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "bannjob-asg"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bannesm-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-bannjob-asg-to-banapp-asg-779",
+    "priority": 1006,
+    "direction": "Inbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "779"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "bannjob-asg"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "banapp-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-bannjob-asg-to-banapp-asg-895",
+    "priority": 1007,
+    "direction": "Inbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "895"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "bannjob-asg"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "banapp-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-bannjob-asg-to-banapp-asg-998",
+    "priority": 1008,
+    "direction": "Inbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "998"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "bannjob-asg"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "banapp-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-bannjob-asg-to-banapp-asg-1015",
+    "priority": 1009,
+    "direction": "Inbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "1015"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "bannjob-asg"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "banapp-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-bannjob-asg-to-banapp-asg-846",
+    "priority": 1010,
+    "direction": "Inbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "846"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "bannjob-asg"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "banapp-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-bannjob-asg-to-banapp-asg-781",
+    "priority": 1011,
+    "direction": "Inbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "781"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "bannjob-asg"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "banapp-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-bannjob-asg-to-bandb-asg-1521",
+    "priority": 1012,
+    "direction": "Inbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "1521"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "bannjob-asg"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bandb-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-bannjob-asg-to-42-80",
+    "priority": 1013,
+    "direction": "Inbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "80"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "bannjob-asg"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "42"
+        }
+    ]
+}
