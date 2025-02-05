@@ -67,3 +67,26 @@
         }
     ]
 }
+{
+    "name": "Allow-Inbound-bannsrv-asg-to-bandb-asg-1521",
+    "priority": 1001,
+    "direction": "Inbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "1521"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "bannsrv-asg"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bandb-asg"
+        }
+    ]
+}

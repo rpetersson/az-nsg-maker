@@ -895,3 +895,302 @@
         }
     ]
 }
+{
+    "name": "Allow-Outbound-bandb-asg-to-bannjob-asg-1521",
+    "priority": 1001,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "1521"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "bandb-asg"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bannjob-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-Outbound-bandb-asg-to-bannjob-asg-1521",
+    "priority": 1002,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "1521"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "bandb-asg"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bannjob-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-Outbound-bannesm-asg-to-bannjob-asg-8082",
+    "priority": 1003,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "8082"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "bannesm-asg"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bannjob-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-Outbound-bannesm-asg-to-bannjob-asg-8081",
+    "priority": 1004,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "8081"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "bannesm-asg"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bannjob-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-Outbound-bannesm-asg-to-bannjob-asg-8082",
+    "priority": 1005,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "8082"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "bannesm-asg"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bannjob-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-Outbound-banapp-asg-to-bannjob-asg-779",
+    "priority": 1006,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "779"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "banapp-asg"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bannjob-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-Outbound-banapp-asg-to-bannjob-asg-895",
+    "priority": 1007,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "895"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "banapp-asg"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bannjob-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-Outbound-banapp-asg-to-bannjob-asg-998",
+    "priority": 1008,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "998"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "banapp-asg"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bannjob-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-Outbound-banapp-asg-to-bannjob-asg-1015",
+    "priority": 1009,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "1015"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "banapp-asg"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bannjob-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-Outbound-banapp-asg-to-bannjob-asg-846",
+    "priority": 1010,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "846"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "banapp-asg"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bannjob-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-Outbound-banapp-asg-to-bannjob-asg-781",
+    "priority": 1011,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "781"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "banapp-asg"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bannjob-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-Outbound-bandb-asg-to-bannjob-asg-1521",
+    "priority": 1012,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "1521"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "bandb-asg"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bannjob-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-Outbound-42-to-bannjob-asg-80",
+    "priority": 1013,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "80"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "42"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bannjob-asg"
+        }
+    ]
+}

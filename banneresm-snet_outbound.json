@@ -136,3 +136,49 @@
         }
     ]
 }
+{
+    "name": "Allow-Outbound-42-to-bannesm-asg-80",
+    "priority": 1001,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "80"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "42"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bannesm-asg"
+        }
+    ]
+}
+{
+    "name": "Allow-Outbound-bannesm-asg-to-bannesm-asg-8080",
+    "priority": 1002,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "8080"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "bannesm-asg"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bannesm-asg"
+        }
+    ]
+}
