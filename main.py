@@ -74,7 +74,7 @@ class NSGRule:
 
     def to_dict(self) -> dict:
         return {
-            'name': 'Allow-{}-to-{}-{}'.format(self.source_asg, self.destination_asg, self.destination_port),
+            'name': 'Allow-{}-{}-to-{}-{}'.format(self.direction, self.source_asg, self.destination_asg, self.destination_port),
             'priority': self.priority,
             'direction': self.direction,
             'access': 'Allow',
@@ -86,8 +86,6 @@ class NSGRule:
         }
 
 
-
-    
 # Create an instance of LoadDataFromExcel
 loader = LoadDataFromExcel('/Users/robban/Downloads/azmigratefiltered.xls')
 loader.loadExcel()

@@ -21,3 +21,26 @@
         }
     ]
 }
+{
+    "name": "Allow-Outbound-bandb-asg-to-bannsrv-asg-1521",
+    "priority": 1001,
+    "direction": "Outbound",
+    "access": "Allow",
+    "protocol": "Tcp",
+    "sourcePortRanges": [
+        "*"
+    ],
+    "destinationPortRanges": [
+        "1521"
+    ],
+    "sourceApplicationSecurityGroups": [
+        {
+            "id": "bandb-asg"
+        }
+    ],
+    "destinationApplicationSecurityGroups": [
+        {
+            "id": "bannsrv-asg"
+        }
+    ]
+}
