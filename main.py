@@ -117,14 +117,14 @@ def main(input_file: str, output_dir: str) -> None:
         sourceIp = i.get("Source IP")
         destinationIp = i.get("Destination IP")
 
-        # Handle empty cells that show up as "42" or empty strings
-        if sourceAsg == "42" or sourceAsg == "":
+        # Handle empty cells that show up as empty strings
+        if sourceAsg == "":
             sourceAsg = None
-        if destinationAsg == "42" or destinationAsg == "":
+        if destinationAsg == "":
             destinationAsg = None
-        if sourceIp == "42" or sourceIp == "":
+        if sourceIp == "":
             sourceIp = None
-        if destinationIp == "42" or destinationIp == "":
+        if destinationIp == "":
             destinationIp = None
 
         # Use IP addresses if ASG values are None
