@@ -1,0 +1,25 @@
+[
+    {
+        "name": "Allow-Inbound-sourceTestASg-to-destinationtestAsg-8082",
+        "priority": 1001,
+        "direction": "Inbound",
+        "access": "Allow",
+        "protocol": "Tcp",
+        "sourcePortRanges": [
+            "*"
+        ],
+        "destinationPortRanges": [
+            "8082"
+        ],
+        "sourceApplicationSecurityGroups": [
+            {
+                "id": "sourceTestASg"
+            }
+        ],
+        "destinationApplicationSecurityGroups": [
+            {
+                "id": "destinationtestAsg"
+            }
+        ]
+    }
+]

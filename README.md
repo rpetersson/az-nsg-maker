@@ -1,1 +1,56 @@
 # az-nsg-maker
+
+## Usage
+
+To use `main.py`, run the following command:
+
+```bash
+python main.py --arg1 value1 --arg2 value2
+```
+
+Replace `--arg1` and `--arg2` with the appropriate arguments for your use case. For more details on the available arguments, you can run:
+
+```bash
+python main.py --help
+```
+
+### Examples
+
+1. **Basic Usage:**
+
+   To process an Excel file named `input_2.xls` and store the output in the `output` directory, use the following command:
+
+   ```bash
+   python main.py input_2.xls output
+   ```
+
+2. **Custom Input and Output:**
+
+   If you have a different input file and want to specify a different output directory:
+
+   ```bash
+   python main.py path/to/your/input_file.xls path/to/your/output_directory
+   ```
+
+3. **Help Command:**
+
+   To see all available options and arguments:
+
+   ```bash
+   python main.py --help
+   ```
+
+### Purpose
+
+This script is meant to be used with the Azure Migrate dependency Excel output to create NSG files. The Excel file should have the following columns:
+
+| Source server name | sourceAsg     | Source IP      | Destination server name | Destination IP    | Destination port | Comment | Environment | destinationAsg     |
+|--------------------|---------------|----------------|-------------------------|-------------------|------------------|---------|-------------|--------------------|
+| server1            |               | 192.168.1.1    | server2                 | 192.168.2.1       | 8080             | HTTP    | PROD        |                    |
+| server1            | sourceTestASg | 192.168.1.1    | server2                 | 192.168.2.1       | 8080             | HTTP    | PROD        | destinationTestASg |
+
+Replace the example data with your actual data while maintaining the structure.
+
+### Custom Formats
+
+If you have another format, define the columns in `schema.py` to match your Excel file structure.

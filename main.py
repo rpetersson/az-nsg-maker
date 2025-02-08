@@ -5,38 +5,98 @@ import argparse  # Import argparse for command-line arguments
 from schema import EXCEL_SHEET_SCHEMA  # Import the schema
 
 class LoadDataFromExcel:
+    """
+    Class to load data from an Excel file and convert it to JSON format.
+    """
     def __init__(self, path: str) -> None:
+        """
+        Initialize the LoadDataFromExcel class with the path to the Excel file.
+
+        :param path: Path to the Excel file.
+        """
         self.path = path
         self.data = None  # Initialize data as None
         
     def loadExcel(self) -> None:
+        """
+        Load the Excel file and convert it to JSON format using the provided schema.
+        """
         self.data = parse_excel_to_json(EXCEL_SHEET_SCHEMA, self.path)  # Use the imported schema
         
     def getData(self) -> list:
+        """
+        Get the loaded data.
+
+        :return: List of data loaded from the Excel file.
+        """
         return self.data
 
 class NSGRule:
-    def __init__(self, priority: int, direction: str, source_asg: str, destination_asg: str, destination_port: str) -> None:
+    """
+    Class to represent a Network Security Group (NSG) rule.
+    """
+    def __init__(self, priority: int, direction: str, source_asg: str, destination_asg: str, destination_port: str, source_ip: str = None, destination_ip: str = None) -> None:
+        """
+        Initialize the NSGRule class with the given parameters.
+
+        :param priority: Priority of the rule.
+        :param direction: Direction of the rule (Inbound/Outbound).
+        :param source_asg: Source Application Security Group.
+        :param destination_asg: Destination Application Security Group.
+        :param destination_port: Destination port.
+        :param source_ip: Source IP address (optional).
+        :param destination_ip: Destination IP address (optional).
+        """
         self.priority = priority
         self.direction = direction
         self.source_asg = source_asg
         self.destination_asg = destination_asg
         self.destination_port = destination_port
+        self.source_ip = source_ip
+        self.destination_ip = destination_ip
 
     def to_dict(self) -> dict:
-        return {
-            'name': 'Allow-{}-{}-to-{}-{}'.format(self.direction, self.source_asg, self.destination_asg, self.destination_port),
+        """
+        Convert the NSG rule to a dictionary format.
+
+        :return: Dictionary representation of the NSG rule.
+        """
+        rule = {
+            'name': 'Allow-{}-{}-to-{}-{}'.format(
+                self.direction,
+                self.source_asg or self.source_ip,
+                self.destination_asg or self.destination_ip,
+                self.destination_port
+            ),
             'priority': self.priority,
             'direction': self.direction,
             'access': 'Allow',
             'protocol': 'Tcp',
             'sourcePortRanges': ['*'],
-            'destinationPortRanges': [self.destination_port],
-            'sourceApplicationSecurityGroups': [{'id': self.source_asg}],
-            'destinationApplicationSecurityGroups': [{'id': self.destination_asg}]
+            'destinationPortRanges': [self.destination_port]
         }
 
+        # Add sourceApplicationSecurityGroups or sourceAddressPrefixes
+        if self.source_asg:
+            rule['sourceApplicationSecurityGroups'] = [{'id': self.source_asg}]
+        elif self.source_ip:
+            rule['sourceAddressPrefixes'] = [self.source_ip]
+
+        # Add destinationApplicationSecurityGroups or destinationAddressPrefixes
+        if self.destination_asg:
+            rule['destinationApplicationSecurityGroups'] = [{'id': self.destination_asg}]
+        elif self.destination_ip:
+            rule['destinationAddressPrefixes'] = [self.destination_ip]
+
+        return rule
+
 def main(input_file: str, output_dir: str) -> None:
+    """
+    Main function to process the Excel file and generate NSG rules.
+
+    :param input_file: Path to the input Excel file.
+    :param output_dir: Directory to store the output JSON files.
+    """
     # Create an instance of LoadDataFromExcel
     loader = LoadDataFromExcel(input_file)
     loader.loadExcel()
@@ -53,25 +113,50 @@ def main(input_file: str, output_dir: str) -> None:
 
     for i in sortedSheetData:
         sourceAsg = i.get("sourceAsg")
-        if previousSourceAsg != sourceAsg:
-            c = 0
-        c += 1
-        previousSourceAsg = sourceAsg
+        destinationAsg = i.get("destinationAsg")
+        sourceIp = i.get("Source IP")
+        destinationIp = i.get("Destination IP")
+
+        # Handle empty cells that show up as "42" or empty strings
+        if sourceAsg == "42" or sourceAsg == "":
+            sourceAsg = None
+        if destinationAsg == "42" or destinationAsg == "":
+            destinationAsg = None
+        if sourceIp == "42" or sourceIp == "":
+            sourceIp = None
+        if destinationIp == "42" or destinationIp == "":
+            destinationIp = None
+
+        # Use IP addresses if ASG values are None
+        if sourceAsg is None:
+            sourceAsg = sourceIp
+        if destinationAsg is None:
+            destinationAsg = destinationIp
 
         inboundNsgRule = NSGRule(
-            priority=1000+c, 
-            direction='Inbound', 
-            source_asg=i.get("sourceAsg"), 
-            destination_asg=i.get("destinationAsg"), 
-            destination_port=i.get("Destination port")).to_dict()
+            priority=1000 + c,
+            direction='Inbound',
+            source_asg=sourceAsg if sourceAsg != sourceIp else None,
+            destination_asg=destinationAsg if destinationAsg != destinationIp else None,
+            destination_port=i.get("Destination port"),
+            source_ip=sourceIp if sourceAsg == sourceIp else None,
+            destination_ip=destinationIp if destinationAsg == destinationIp else None
+        ).to_dict()
 
         outboundNsgRule = NSGRule(
-            priority=1000+c, 
-            direction='Outbound', 
-            source_asg=i.get("sourceAsg"), 
-            destination_asg=i.get("destinationAsg"), 
-            destination_port=i.get("Destination port")).to_dict()
-        outboundNsgRule['name'] = 'Allow-Outbound-{}-to-{}-{}'.format(outboundNsgRule['sourceApplicationSecurityGroups'][0]['id'], outboundNsgRule['destinationApplicationSecurityGroups'][0]['id'], outboundNsgRule['destinationPortRanges'][0])
+            priority=1000 + c,
+            direction='Outbound',
+            source_asg=sourceAsg if sourceAsg != sourceIp else None,
+            destination_asg=destinationAsg if destinationAsg != destinationIp else None,
+            destination_port=i.get("Destination port"),
+            source_ip=sourceIp if sourceAsg == sourceIp else None,
+            destination_ip=destinationIp if destinationAsg == destinationIp else None
+        ).to_dict()
+        outboundNsgRule['name'] = 'Allow-Outbound-{}-to-{}-{}'.format(
+            outboundNsgRule.get('sourceApplicationSecurityGroups', [{'id': sourceIp}])[0].get('id', sourceIp) if 'sourceApplicationSecurityGroups' in outboundNsgRule else outboundNsgRule.get('sourceAddressPrefixes', [sourceIp])[0],
+            outboundNsgRule.get('destinationApplicationSecurityGroups', [{'id': destinationIp}])[0].get('id', destinationIp) if 'destinationApplicationSecurityGroups' in outboundNsgRule else outboundNsgRule.get('destinationAddressPrefixes', [destinationIp])[0],
+            outboundNsgRule['destinationPortRanges'][0]
+        )
 
         destination_asg = i.get("destinationAsg")
         if destination_asg not in rules_by_destination_asg:
@@ -81,6 +166,8 @@ def main(input_file: str, output_dir: str) -> None:
         if sourceAsg not in rules_by_source_asg:
             rules_by_source_asg[sourceAsg] = []
         rules_by_source_asg[sourceAsg].append(outboundNsgRule)
+
+        c += 1  # Increment the counter
 
     # Create a directory to store the files
     os.makedirs(output_dir, exist_ok=True)
@@ -99,7 +186,7 @@ def main(input_file: str, output_dir: str) -> None:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Process Excel file to generate NSG rules.')
-    parser.add_argument('input_file', type=str, nargs='?', default='input.xls', help='Path to the input Excel file')
+    parser.add_argument('input_file', type=str, nargs='?', default='input_2.xls', help='Path to the input Excel file')
     parser.add_argument('output_dir', type=str, nargs='?', default='output', help='Directory to store the output JSON files')
     args = parser.parse_args()
     main(args.input_file, args.output_dir)

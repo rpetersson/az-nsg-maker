@@ -1,0 +1,21 @@
+[
+    {
+        "name": "Allow-Inbound-144.164.6.13-to-144.164.108.198-8082",
+        "priority": 1000,
+        "direction": "Inbound",
+        "access": "Allow",
+        "protocol": "Tcp",
+        "sourcePortRanges": [
+            "*"
+        ],
+        "destinationPortRanges": [
+            "8082"
+        ],
+        "sourceAddressPrefixes": [
+            "144.164.6.13"
+        ],
+        "destinationAddressPrefixes": [
+            "144.164.108.198"
+        ]
+    }
+]
