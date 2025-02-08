@@ -1,5 +1,6 @@
 from python_excel2json import parse_excel_to_json
 import json
+import os
 
 class LoadDataFromExcel:
     def __init__(self, path: str) -> None:
@@ -92,18 +93,20 @@ loader.loadExcel()
 data = loader.getData()  # Access the data variable
 
 sheet_data = data[0].get("results")
-#sort sheet data by subnet name
-sortedSheetData = sorted(sheet_data, key=lambda x: x['Az snet'])
+#sort sheet data by sourceAsg
+sortedSheetData = sorted(sheet_data, key=lambda x: x['sourceAsg'])
 
 c = 0
-previousSubnet = ""
+previousSourceAsg = ""
+rules_by_destination_asg = {}
+rules_by_source_asg = {}
 
 for i in sortedSheetData:
-    subnet = i.get("Az snet")
-    if previousSubnet != subnet:
+    sourceAsg = i.get("sourceAsg")
+    if previousSourceAsg != sourceAsg:
         c = 0
     c += 1
-    previousSubnet = subnet
+    previousSourceAsg = sourceAsg
 
     inboundNsgRule = NSGRule(
         priority=1000+c, 
@@ -111,22 +114,36 @@ for i in sortedSheetData:
         source_asg=i.get("sourceAsg"), 
         destination_asg=i.get("destinationAsg"), 
         destination_port=i.get("Destination port")).to_dict()
-    
-    outobundNsgRule = NSGRule(
+
+    outboundNsgRule = NSGRule(
         priority=1000+c, 
         direction='Outbound', 
-        source_asg=i.get("destinationAsg"), 
-        destination_asg=i.get("sourceAsg"), 
+        source_asg=i.get("sourceAsg"), 
+        destination_asg=i.get("destinationAsg"), 
         destination_port=i.get("Destination port")).to_dict()
+    outboundNsgRule['name'] = 'Allow-Outbound-{}-to-{}-{}'.format(outboundNsgRule['sourceApplicationSecurityGroups'][0]['id'], outboundNsgRule['destinationApplicationSecurityGroups'][0]['id'], outboundNsgRule['destinationPortRanges'][0])
 
-    print(json.dumps(inboundNsgRule, indent=4))
+    destination_asg = i.get("destinationAsg")
+    if destination_asg not in rules_by_destination_asg:
+        rules_by_destination_asg[destination_asg] = []
+    rules_by_destination_asg[destination_asg].append(inboundNsgRule)
 
-    print(json.dumps(outobundNsgRule, indent=4))
+    if sourceAsg not in rules_by_source_asg:
+        rules_by_source_asg[sourceAsg] = []
+    rules_by_source_asg[sourceAsg].append(outboundNsgRule)
 
-    with open(f'{subnet}_inbound.json', 'a') as f:
-        f.write(json.dumps(inboundNsgRule, indent=4))
-        f.write('\n')
-    
-    with open(f'{subnet}_outbound.json', 'a') as f:
-        f.write(json.dumps(outobundNsgRule, indent=4))
-        f.write('\n')
+# Create a directory to store the files
+output_dir = '.'
+os.makedirs(output_dir, exist_ok=True)
+
+# Write each set of inbound rules to a separate file
+for destination_asg, rules in rules_by_destination_asg.items():
+    file_path = os.path.join(output_dir, f'{destination_asg}_inbound_subnet.json')
+    with open(file_path, 'w') as f:
+        json.dump(rules, f, indent=4)
+
+# Write each set of outbound rules to a separate file
+for source_asg, rules in rules_by_source_asg.items():
+    file_path = os.path.join(output_dir, f'{source_asg}_outbound_subnet.json')
+    with open(file_path, 'w') as f:
+        json.dump(rules, f, indent=4)
