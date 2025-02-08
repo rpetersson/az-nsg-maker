@@ -1,0 +1,94 @@
+[
+    {
+        "name": "Allow-Inbound-42-to-0-8082",
+        "priority": 1020,
+        "direction": "Inbound",
+        "access": "Allow",
+        "protocol": "Tcp",
+        "sourcePortRanges": [
+            "*"
+        ],
+        "destinationPortRanges": [
+            "8082"
+        ],
+        "sourceApplicationSecurityGroups": [
+            {
+                "id": "42"
+            }
+        ],
+        "destinationApplicationSecurityGroups": [
+            {
+                "id": "0"
+            }
+        ]
+    },
+    {
+        "name": "Allow-Inbound-banapp-asg-to-0-8084",
+        "priority": 1011,
+        "direction": "Inbound",
+        "access": "Allow",
+        "protocol": "Tcp",
+        "sourcePortRanges": [
+            "*"
+        ],
+        "destinationPortRanges": [
+            "8084"
+        ],
+        "sourceApplicationSecurityGroups": [
+            {
+                "id": "banapp-asg"
+            }
+        ],
+        "destinationApplicationSecurityGroups": [
+            {
+                "id": "0"
+            }
+        ]
+    },
+    {
+        "name": "Allow-Inbound-banapp-asg-to-0-8084",
+        "priority": 1015,
+        "direction": "Inbound",
+        "access": "Allow",
+        "protocol": "Tcp",
+        "sourcePortRanges": [
+            "*"
+        ],
+        "destinationPortRanges": [
+            "8084"
+        ],
+        "sourceApplicationSecurityGroups": [
+            {
+                "id": "banapp-asg"
+            }
+        ],
+        "destinationApplicationSecurityGroups": [
+            {
+                "id": "0"
+            }
+        ]
+    },
+    {
+        "name": "Allow-Inbound-bandb-asg-to-0-1521",
+        "priority": 1033,
+        "direction": "Inbound",
+        "access": "Allow",
+        "protocol": "Tcp",
+        "sourcePortRanges": [
+            "*"
+        ],
+        "destinationPortRanges": [
+            "1521"
+        ],
+        "sourceApplicationSecurityGroups": [
+            {
+                "id": "bandb-asg"
+            }
+        ],
+        "destinationApplicationSecurityGroups": [
+            {
+                "id": "0"
+            }
+        ]
+    }
+]
