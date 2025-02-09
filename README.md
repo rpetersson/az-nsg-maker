@@ -28,6 +28,20 @@ To run the container and enter a command, use:
 docker run -it nsg-maker bash
 ```
 
+To run the container with a mounted volume and enter a command, use:
+
+```bash
+docker run -d -v ~/Downloads:/mnt/downloads nsg-maker
+```
+
+To execute commands inside the running container, use:
+
+```bash
+docker exec -it <container_id> bash
+```
+
+Replace `<container_id>` with the actual container ID, which you can find using `docker ps`.
+
 Once inside the container, you can run the script as follows:
 
 ```bash
@@ -59,6 +73,22 @@ python main.py -h
    ```bash
    python main.py --help
    ```
+
+4. **Running with Docker and Volume Mount:**
+
+   To run the container with a mounted volume and execute commands inside it:
+
+   ```bash
+   docker run -d -v ~/Downloads:/mnt/downloads nsg-maker
+   ```
+
+   Then, to enter the container:
+
+   ```bash
+   docker exec -it <container_id> bash
+   ```
+
+   Replace `<container_id>` with the actual container ID, which you can find using `docker ps`.
 
 ### Purpose
 
