@@ -42,7 +42,7 @@ python main.py --help
 
 ### Purpose
 
-This script is meant to be used with the Azure Migrate dependency Excel output to create NSG files. The Excel file should have the following columns:
+This script is meant to be used with the Azure Migrate dependency Excel output to create azure NSGs. The Excel file should have the following columns:
 
 | Source server name | sourceAsg     | Source IP      | Destination server name | Destination IP    | Destination port | Comment | Environment | destinationAsg     |
 |--------------------|---------------|----------------|-------------------------|-------------------|------------------|---------|-------------|--------------------|
