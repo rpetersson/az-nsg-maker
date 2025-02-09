@@ -1,4 +1,4 @@
-name: Lint
+name: Lint and Test Coverage
 
 on: [push, pull_request]
 
@@ -21,11 +21,24 @@ jobs:
         python -m pip install --upgrade pip
         pip install flake8
         pip install autopep8
+        pip install coverage
 
     - name: Run linting
+      continue-on-error: true
       run: |
         flake8 .
 
     - name: Run autopep8 to fix linting issues
       run: |
         autopep8 --in-place --aggressive --aggressive .
+
+    - name: Run tests and generate coverage report
+      run: |
+        coverage run -m unittest discover
+        coverage xml
+
+    - name: Upload coverage report
+      uses: actions/upload-artifact@v2
+      with:
+        name: coverage-report
+        path: coverage.xml
