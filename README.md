@@ -70,3 +70,31 @@ The program handles empty cells by setting them to `None` and uses IP addresses 
 ### Custom Formats
 
 If you have another format, define the columns in `schema.py` to match your Excel file structure.
+
+### Example Output
+
+Here is an example of how the generated output can look:
+
+```json
+[
+    {
+        "name": "Allow-Inbound-144.164.6.13-to-144.164.108.198-8082",
+        "priority": 1000,
+        "direction": "Inbound",
+        "access": "Allow",
+        "protocol": "Tcp",
+        "sourcePortRanges": [
+            "*"
+        ],
+        "destinationPortRanges": [
+            "8082"
+        ],
+        "sourceAddressPrefixes": [
+            "144.164.6.13"
+        ],
+        "destinationAddressPrefixes": [
+            "144.164.108.198"
+        ]
+    }
+]
+```
