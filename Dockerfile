@@ -10,8 +10,5 @@ COPY . /app
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Define environment variable
-ENV NAME World
-
-# Run main.py when the container launches
-CMD ["python", "main.py"]
+# Run the container and wait for commands
+ENTRYPOINT ["tail", "-f", "/dev/null"]

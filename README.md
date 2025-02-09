@@ -14,6 +14,26 @@ Replace `--arg1` and `--arg2` with the appropriate arguments for your use case. 
 python main.py --help
 ```
 
+### Running with Docker
+
+To build the Docker container, run the following command in the project directory:
+
+```bash
+docker build -t nsg-maker .
+```
+
+To run the container and enter a command, use:
+
+```bash
+docker run -it nsg-maker bash
+```
+
+Once inside the container, you can run the script as follows:
+
+```bash
+python main.py -h
+```
+
 ### Examples
 
 1. **Basic Usage:**
