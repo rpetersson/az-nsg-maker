@@ -27,7 +27,3 @@ jobs:
         coverage run -m unittest discover
         coverage report
         coverage report -m
-
-    - name: Display coverage report
-      run: |
-        cat coverage.xml
