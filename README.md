@@ -51,6 +51,22 @@ This script is meant to be used with the Azure Migrate dependency Excel output t
 
 Replace the example data with your actual data while maintaining the structure.
 
+### How It Works
+
+The program processes the Excel file and generates Network Security Group (NSG) rules based on the data. For each line in the Excel file, it creates two rules:
+
+1. **Inbound Rule:** This rule allows traffic from the source to the destination.
+2. **Outbound Rule:** This rule allows traffic from the destination back to the source.
+
+The rules are generated based on the following columns in the Excel file:
+- `sourceAsg`: Source Application Security Group
+- `Source IP`: Source IP address
+- `destinationAsg`: Destination Application Security Group
+- `Destination IP`: Destination IP address
+- `Destination port`: Destination port
+
+The program handles empty cells by setting them to `None` and uses IP addresses if ASG values are not provided. The generated rules are saved as JSON files in the specified output directory.
+
 ### Custom Formats
 
 If you have another format, define the columns in `schema.py` to match your Excel file structure.
