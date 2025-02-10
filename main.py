@@ -90,99 +90,81 @@ class NSGRule:
 
         return rule
 
+class NSGRuleManager:
+    def __init__(self, input_file: str, output_dir: str) -> None:
+        self.input_file = input_file
+        self.output_dir = output_dir
+        self.loader = LoadDataFromExcel(input_file)
+        self.rules_by_destination_asg = {}
+        self.rules_by_source_asg = {}
+
+    def process_data(self) -> None:
+        self.loader.loadExcel()
+        data = self.loader.getData()
+        sheet_data = data[0].get("results")
+        sorted_sheet_data = sorted(sheet_data, key=lambda x: x['sourceAsg'])
+
+        c = 0
+        for i in sorted_sheet_data:
+            source_asg = i.get("sourceAsg") or i.get("Source IP")
+            destination_asg = i.get("destinationAsg") or i.get("Destination IP")
+            source_ip = i.get("Source IP")
+            destination_ip = i.get("Destination IP")
+
+            inbound_nsg_rule = NSGRule(
+                priority=1000 + c,
+                direction='Inbound',
+                source_asg=source_asg if source_asg != source_ip else None,
+                destination_asg=destination_asg if destination_asg != destination_ip else None,
+                destination_port=i.get("Destination port"),
+                source_ip=source_ip if source_asg == source_ip else None,
+                destination_ip=destination_ip if destination_asg == destination_ip else None
+            ).to_dict()
+
+            outbound_nsg_rule = NSGRule(
+                priority=1000 + c,
+                direction='Outbound',
+                source_asg=source_asg if source_asg != source_ip else None,
+                destination_asg=destination_asg if destination_asg != destination_ip else None,
+                destination_port=i.get("Destination port"),
+                source_ip=source_ip if source_asg == source_ip else None,
+                destination_ip=destination_ip if destination_asg == destination_ip else None
+            ).to_dict()
+            outbound_nsg_rule['name'] = 'Allow-Outbound-{}-to-{}-{}'.format(
+                outbound_nsg_rule.get('sourceApplicationSecurityGroups', [{'id': source_ip}])[0].get('id', source_ip) if 'sourceApplicationSecurityGroups' in outbound_nsg_rule else outbound_nsg_rule.get('sourceAddressPrefixes', [source_ip])[0],
+                outbound_nsg_rule.get('destinationApplicationSecurityGroups', [{'id': destination_ip}])[0].get('id', destination_ip) if 'destinationApplicationSecurityGroups' in outbound_nsg_rule else outbound_nsg_rule.get('destinationAddressPrefixes', [destination_ip])[0],
+                outbound_nsg_rule['destinationPortRanges'][0]
+            )
+
+            if destination_asg not in self.rules_by_destination_asg:
+                self.rules_by_destination_asg[destination_asg] = []
+            self.rules_by_destination_asg[destination_asg].append(inbound_nsg_rule)
+
+            if source_asg not in self.rules_by_source_asg:
+                self.rules_by_source_asg[source_asg] = []
+            self.rules_by_source_asg[source_asg].append(outbound_nsg_rule)
+
+            c += 1
+
+    def write_rules_to_files(self) -> None:
+        os.makedirs(self.output_dir, exist_ok=True)
+
+        for destination_asg, rules in self.rules_by_destination_asg.items():
+            file_path = os.path.join(self.output_dir, f'{destination_asg}_inbound_subnet.json')
+            with open(file_path, 'w') as f:
+                json.dump(rules, f, indent=4)
+
+        for source_asg, rules in self.rules_by_source_asg.items():
+            file_path = os.path.join(self.output_dir, f'{source_asg}_outbound_subnet.json')
+            with open(file_path, 'w') as f:
+                json.dump(rules, f, indent=4)
+
+
 def main(input_file: str, output_dir: str) -> None:
-    """
-    Main function to process the Excel file and generate NSG rules.
+    nsg_rule_manager = NSGRuleManager(input_file, output_dir)
+    nsg_rule_manager.process_data()
+    nsg_rule_manager.write_rules_to_files()
 
-    :param input_file: Path to the input Excel file.
-    :param output_dir: Directory to store the output JSON files.
-    """
-    # Create an instance of LoadDataFromExcel
-    loader = LoadDataFromExcel(input_file)
-    loader.loadExcel()
-    data = loader.getData()  # Access the data variable
-
-    sheet_data = data[0].get("results")
-    #sort sheet data by sourceAsg
-    sortedSheetData = sorted(sheet_data, key=lambda x: x['sourceAsg'])
-
-    c = 0
-    previousSourceAsg = ""
-    rules_by_destination_asg = {}
-    rules_by_source_asg = {}
-
-    for i in sortedSheetData:
-        sourceAsg = i.get("sourceAsg")
-        destinationAsg = i.get("destinationAsg")
-        sourceIp = i.get("Source IP")
-        destinationIp = i.get("Destination IP")
-
-        # Handle empty cells that show up as empty strings
-        if sourceAsg == "":
-            sourceAsg = None
-        if destinationAsg == "":
-            destinationAsg = None
-        if sourceIp == "":
-            sourceIp = None
-        if destinationIp == "":
-            destinationIp = None
-
-        # Use IP addresses if ASG values are None
-        if sourceAsg is None:
-            sourceAsg = sourceIp
-        if destinationAsg is None:
-            destinationAsg = destinationIp
-
-        inboundNsgRule = NSGRule(
-            priority=1000 + c,
-            direction='Inbound',
-            source_asg=sourceAsg if sourceAsg != sourceIp else None,
-            destination_asg=destinationAsg if destinationAsg != destinationIp else None,
-            destination_port=i.get("Destination port"),
-            source_ip=sourceIp if sourceAsg == sourceIp else None,
-            destination_ip=destinationIp if destinationAsg == destinationIp else None
-        ).to_dict()
-
-        outboundNsgRule = NSGRule(
-            priority=1000 + c,
-            direction='Outbound',
-            source_asg=sourceAsg if sourceAsg != sourceIp else None,
-            destination_asg=destinationAsg if destinationAsg != destinationIp else None,
-            destination_port=i.get("Destination port"),
-            source_ip=sourceIp if sourceAsg == sourceIp else None,
-            destination_ip=destinationIp if destinationAsg == destinationIp else None
-        ).to_dict()
-        outboundNsgRule['name'] = 'Allow-Outbound-{}-to-{}-{}'.format(
-            outboundNsgRule.get('sourceApplicationSecurityGroups', [{'id': sourceIp}])[0].get('id', sourceIp) if 'sourceApplicationSecurityGroups' in outboundNsgRule else outboundNsgRule.get('sourceAddressPrefixes', [sourceIp])[0],
-            outboundNsgRule.get('destinationApplicationSecurityGroups', [{'id': destinationIp}])[0].get('id', destinationIp) if 'destinationApplicationSecurityGroups' in outboundNsgRule else outboundNsgRule.get('destinationAddressPrefixes', [destinationIp])[0],
-            outboundNsgRule['destinationPortRanges'][0]
-        )
-
-        destination_asg = i.get("destinationAsg")
-        if destination_asg not in rules_by_destination_asg:
-            rules_by_destination_asg[destination_asg] = []
-        rules_by_destination_asg[destination_asg].append(inboundNsgRule)
-
-        if sourceAsg not in rules_by_source_asg:
-            rules_by_source_asg[sourceAsg] = []
-        rules_by_source_asg[sourceAsg].append(outboundNsgRule)
-
-        c += 1  # Increment the counter
-
-    # Create a directory to store the files
-    os.makedirs(output_dir, exist_ok=True)
-
-    # Write each set of inbound rules to a separate file
-    for destination_asg, rules in rules_by_destination_asg.items():
-        file_path = os.path.join(output_dir, f'{destination_asg}_inbound_subnet.json')
-        with open(file_path, 'w') as f:
-            json.dump(rules, f, indent=4)
-
-    # Write each set of outbound rules to a separate file
-    for source_asg, rules in rules_by_source_asg.items():
-        file_path = os.path.join(output_dir, f'{source_asg}_outbound_subnet.json')
-        with open(file_path, 'w') as f:
-            json.dump(rules, f, indent=4)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Process Excel file to generate NSG rules.')
